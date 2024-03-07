@@ -1,0 +1,5 @@
+services:
+  ponder:
+    build: .
+    env_file:
+      - .env

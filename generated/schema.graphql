@@ -1,0 +1,161 @@
+type Query {
+  eventLog(id: String!, timestamp: Int): EventLog
+  eventLogs(
+    timestamp: Int
+    where: EventLogFilter
+    orderBy: String
+    orderDirection: String
+    before: String
+    after: String
+    limit: Int
+  ): EventLogPage!
+  account(id: String!, timestamp: Int): Account
+  accounts(
+    timestamp: Int
+    where: AccountFilter
+    orderBy: String
+    orderDirection: String
+    before: String
+    after: String
+    limit: Int
+  ): AccountPage!
+}
+
+type EventLog {
+  id: String!
+  address: String!
+  account: String!
+  type: String!
+  amount: BigInt!
+  timestamp: BigInt!
+  blockHeight: BigInt!
+  txFrom: String!
+}
+
+scalar BigInt
+
+type EventLogPage {
+  items: [EventLog!]!
+  pageInfo: PageInfo!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+input EventLogFilter {
+  AND: [EventLogFilter]
+  OR: [EventLogFilter]
+  id: String
+  id_not: String
+  id_in: [String]
+  id_not_in: [String]
+  id_contains: String
+  id_not_contains: String
+  id_starts_with: String
+  id_ends_with: String
+  id_not_starts_with: String
+  id_not_ends_with: String
+  address: String
+  address_not: String
+  address_in: [String]
+  address_not_in: [String]
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_ends_with: String
+  address_not_starts_with: String
+  address_not_ends_with: String
+  account: String
+  account_not: String
+  account_in: [String]
+  account_not_in: [String]
+  account_contains: String
+  account_not_contains: String
+  account_starts_with: String
+  account_ends_with: String
+  account_not_starts_with: String
+  account_not_ends_with: String
+  type: String
+  type_not: String
+  type_in: [String]
+  type_not_in: [String]
+  type_contains: String
+  type_not_contains: String
+  type_starts_with: String
+  type_ends_with: String
+  type_not_starts_with: String
+  type_not_ends_with: String
+  amount: BigInt
+  amount_not: BigInt
+  amount_in: [BigInt]
+  amount_not_in: [BigInt]
+  amount_gt: BigInt
+  amount_lt: BigInt
+  amount_gte: BigInt
+  amount_lte: BigInt
+  timestamp: BigInt
+  timestamp_not: BigInt
+  timestamp_in: [BigInt]
+  timestamp_not_in: [BigInt]
+  timestamp_gt: BigInt
+  timestamp_lt: BigInt
+  timestamp_gte: BigInt
+  timestamp_lte: BigInt
+  blockHeight: BigInt
+  blockHeight_not: BigInt
+  blockHeight_in: [BigInt]
+  blockHeight_not_in: [BigInt]
+  blockHeight_gt: BigInt
+  blockHeight_lt: BigInt
+  blockHeight_gte: BigInt
+  blockHeight_lte: BigInt
+  txFrom: String
+  txFrom_not: String
+  txFrom_in: [String]
+  txFrom_not_in: [String]
+  txFrom_contains: String
+  txFrom_not_contains: String
+  txFrom_starts_with: String
+  txFrom_ends_with: String
+  txFrom_not_starts_with: String
+  txFrom_not_ends_with: String
+}
+
+type Account {
+  id: String!
+  owner: String!
+}
+
+type AccountPage {
+  items: [Account!]!
+  pageInfo: PageInfo!
+}
+
+input AccountFilter {
+  AND: [AccountFilter]
+  OR: [AccountFilter]
+  id: String
+  id_not: String
+  id_in: [String]
+  id_not_in: [String]
+  id_contains: String
+  id_not_contains: String
+  id_starts_with: String
+  id_ends_with: String
+  id_not_starts_with: String
+  id_not_ends_with: String
+  owner: String
+  owner_not: String
+  owner_in: [String]
+  owner_not_in: [String]
+  owner_contains: String
+  owner_not_contains: String
+  owner_starts_with: String
+  owner_ends_with: String
+  owner_not_starts_with: String
+  owner_not_ends_with: String
+}
