@@ -33,6 +33,7 @@ export default createConfig({
     blastMainnet: {
       chainId: 81457,
       transport: http(env.BLAST_RPC_URL),
+      maxRequestsPerSecond: 150,
     },
   },
   contracts: {
@@ -42,15 +43,6 @@ export default createConfig({
       startBlock: env.START_BLOCK,
       endBlock: env.END_BLOCK,
       abi: juiceAccountManagerAbi,
-      filter: {
-        event: [
-          'AccountCreated',
-          'CollateralDeposit',
-          'CollateralWithdrawal',
-          'AccountBorrowed',
-          'AccountRepaid',
-        ],
-      },
     },
     JuiceAccountManager: {
       network: 'blastMainnet',
@@ -58,24 +50,12 @@ export default createConfig({
       startBlock: env.START_BLOCK,
       endBlock: env.END_BLOCK,
       abi: juiceAccountManagerAbi,
-      filter: {
-        event: [
-          'AccountCreated',
-          'CollateralDeposit',
-          'CollateralWithdrawal',
-          'AccountBorrowed',
-          'AccountRepaid',
-        ],
-      },
     },
     JuiceLendingPool: {
       network: 'blastMainnet',
       address: env.JUICE_LENDING_POOL as Address,
       startBlock: env.START_BLOCK,
       abi: juiceLendingPoolAbi,
-      filter: {
-        event: ['Deposit', 'Withdraw', 'Borrow', 'Repay'],
-      },
     },
   },
 })

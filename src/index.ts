@@ -11,6 +11,9 @@ const logEvent = async ({ event, context }) => {
   } else if (event.name === 'Borrow' || event.name === 'Repay') {
     addr = ''
     acc = args.borrower
+  } else if (event.name === 'CollateralLiquidation') {
+    addr = ''
+    acc = args.account
   } else {
     addr = args.owner
     acc = event.args.account
@@ -27,7 +30,7 @@ const logEvent = async ({ event, context }) => {
   }
 
   await context.db.EventLog.upsert({
-    id: event.transaction.hash,
+    id: event.log.id,
     create: record,
     update: record,
   })
@@ -58,6 +61,8 @@ ponder.on('OldJuiceAccountManager:CollateralWithdrawal', logEvent)
 
 ponder.on('OldJuiceAccountManager:AccountCreated', logAccountCreation)
 
+ponder.on('OldJuiceAccountManager:CollateralLiquidation', logEvent)
+
 ponder.on('JuiceAccountManager:AccountBorrowed', logEvent)
 
 ponder.on('JuiceAccountManager:AccountRepaid', logEvent)
@@ -67,6 +72,8 @@ ponder.on('JuiceAccountManager:CollateralDeposit', logEvent)
 ponder.on('JuiceAccountManager:CollateralWithdrawal', logEvent)
 
 ponder.on('JuiceAccountManager:AccountCreated', logAccountCreation)
+
+ponder.on('JuiceAccountManager:CollateralLiquidation', logEvent)
 
 ponder.on('JuiceLendingPool:Deposit', logEvent)
 

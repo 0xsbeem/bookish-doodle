@@ -1,24 +1,8 @@
 type Query {
   eventLog(id: String!, timestamp: Int): EventLog
-  eventLogs(
-    timestamp: Int
-    where: EventLogFilter
-    orderBy: String
-    orderDirection: String
-    before: String
-    after: String
-    limit: Int
-  ): EventLogPage!
+  eventLogs(timestamp: Int, where: EventLogFilter, orderBy: String, orderDirection: String, before: String, after: String, limit: Int): EventLogPage!
   account(id: String!, timestamp: Int): Account
-  accounts(
-    timestamp: Int
-    where: AccountFilter
-    orderBy: String
-    orderDirection: String
-    before: String
-    after: String
-    limit: Int
-  ): AccountPage!
+  accounts(timestamp: Int, where: AccountFilter, orderBy: String, orderDirection: String, before: String, after: String, limit: Int): AccountPage!
 }
 
 type EventLog {
